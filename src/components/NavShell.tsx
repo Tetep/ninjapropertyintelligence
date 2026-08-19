@@ -5,7 +5,7 @@ const TABS: { id: ScreenId; label: string; icon: string; enabled: boolean }[] = 
   { id: 'protocol', label: 'Protocol', icon: '📋', enabled: true },
   { id: 'character', label: 'Character', icon: '🥷', enabled: false },
   { id: 'history', label: 'History', icon: '📈', enabled: false },
-  { id: 'settings', label: 'Settings', icon: '⚙️', enabled: false },
+  { id: 'settings', label: 'Settings', icon: '⚙️', enabled: true },
 ]
 
 interface NavShellProps {
@@ -14,10 +14,10 @@ interface NavShellProps {
 }
 
 /**
- * Static placeholder nav for the five MVP screens (section 33). Today and
- * Protocol are wired up as of Phase 2 — the rest render as disabled tabs
- * so the intended app shape is visible without building ahead of the
- * approved phase.
+ * Static placeholder nav for the five MVP screens (section 33). Today,
+ * Protocol, and Settings are wired up — Character and History render as
+ * disabled tabs so the intended app shape is visible without building
+ * ahead of what's actually done.
  */
 export function NavShell({ active, onNavigate }: NavShellProps) {
   return (

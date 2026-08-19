@@ -107,3 +107,18 @@ export interface Level {
   xpRequired: number
   avatarAsset: AvatarState
 }
+
+/**
+ * The raw answers behind the master identity statement (section 5) —
+ * "Identity → Beliefs → Standards → Behaviors → Evidence → Reinforced
+ * Identity" starts here. Kept distinct from User.identityStatement so the
+ * edited/composed statement and the honest source material both survive —
+ * a future AI coach can reference "in your own words" against these.
+ */
+export interface IdentityAnswers {
+  currentIdentity: string
+  currentPatterns: string
+  targetIdentity: string
+  targetStandards: string
+  updatedAt: string
+}

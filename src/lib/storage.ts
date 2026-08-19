@@ -5,7 +5,7 @@
 // writes through this module so a real backend can replace the guts later
 // without touching components.
 
-import type { Belief, DailyRecord, Level, ProtocolTask, User } from '../types/models'
+import type { Belief, DailyRecord, IdentityAnswers, Level, ProtocolTask, User } from '../types/models'
 import { SEED_BELIEFS, SEED_LEVELS, SEED_PROTOCOL_TASKS, SEED_USER } from '../data/seed'
 
 const KEYS = {
@@ -14,6 +14,7 @@ const KEYS = {
   levels: 'isa:levels',
   protocolTasks: 'isa:protocolTasks',
   dailyRecords: 'isa:dailyRecords',
+  identityAnswers: 'isa:identityAnswers',
 } as const
 
 function read<T>(key: string, fallback: T): T {
@@ -64,12 +65,22 @@ export const store = {
   getProtocolTasks(): ProtocolTask[] {
     return read(KEYS.protocolTasks, SEED_PROTOCOL_TASKS)
   },
+  saveProtocolTasks(tasks: ProtocolTask[]): void {
+    write(KEYS.protocolTasks, tasks)
+  },
 
   getDailyRecords(): DailyRecord[] {
     return read(KEYS.dailyRecords, [] as DailyRecord[])
   },
   saveDailyRecords(records: DailyRecord[]): void {
     write(KEYS.dailyRecords, records)
+  },
+
+  getIdentityAnswers(): IdentityAnswers | null {
+    return read<IdentityAnswers | null>(KEYS.identityAnswers, null)
+  },
+  saveIdentityAnswers(answers: IdentityAnswers): void {
+    write(KEYS.identityAnswers, answers)
   },
 
   /** Wipes all local app data. Not exposed in the UI yet — dev convenience. */

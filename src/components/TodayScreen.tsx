@@ -1,6 +1,7 @@
 import type { Belief, Level, ProtocolTask, User } from '../types/models'
-import type { TodayScoreSummary } from '../lib/today'
+import type { DayProgress, TodayScoreSummary } from '../lib/today'
 import { NinjaMark } from './NinjaMark'
+import { WeekMeter } from './WeekMeter'
 
 const CATEGORY_LABEL: Record<ProtocolTask['category'], string> = {
   night_prep: 'Night Prep',
@@ -19,6 +20,7 @@ interface TodayScreenProps {
   nextLevel: Level | null
   score: TodayScoreSummary
   nextMission: ProtocolTask | null
+  weekProgress: DayProgress[]
   onGoToProtocol: () => void
 }
 
@@ -29,6 +31,7 @@ export function TodayScreen({
   nextLevel,
   score,
   nextMission,
+  weekProgress,
   onGoToProtocol,
 }: TodayScreenProps) {
   const xpIntoLevel = user.lifetimeXp - currentLevel.xpRequired
@@ -89,6 +92,8 @@ export function TodayScreen({
           <p className="mission-name">🎉 Protocol clear for today. Nothing waiting on you.</p>
         )}
       </section>
+
+      <WeekMeter days={weekProgress} />
 
       <section className="beliefs-card">
         <p className="eyebrow">Standing Beliefs</p>

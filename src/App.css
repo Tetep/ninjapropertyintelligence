@@ -290,3 +290,102 @@ section {
   color: var(--text-dim);
   line-height: 1.4;
 }
+
+/* --- Week meter --- */
+
+.week-meter__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.week-meter__col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+
+.week-cell {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 6px;
+  background: var(--border);
+}
+
+.week-cell--empty {
+  background: var(--bg);
+  border: 1px dashed var(--border);
+}
+
+.week-cell--zero {
+  background: var(--border);
+}
+
+.week-cell--low {
+  background: color-mix(in srgb, var(--accent) 35%, var(--bg-elevated));
+}
+
+.week-cell--mid {
+  background: color-mix(in srgb, var(--accent) 65%, var(--bg-elevated));
+}
+
+.week-cell--high {
+  background: var(--accent);
+}
+
+.week-cell--today {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+}
+
+.week-meter__label {
+  font-size: 10px;
+  color: var(--text-faint);
+}
+
+/* --- Settings & Identity Wizard --- */
+
+.settings-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.settings-edit-btn {
+  margin-top: 12px;
+  width: 100%;
+}
+
+.missions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.mission-input {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  padding: 10px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.settings-future-card {
+  opacity: 0.6;
+}
+
+.wizard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.wizard-input,
+.wizard-draft {
+  margin-top: 12px;
+}

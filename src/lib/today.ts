@@ -65,6 +65,50 @@ export function getTodayScore(
   return { earned, max }
 }
 
+export interface DayProgress {
+  date: string
+  weekday: number
+  earned: number
+  max: number
+  /** null when nothing was scheduled that day (max === 0) — distinct from a real 0. */
+  ratio: number | null
+  isToday: boolean
+  hasActivity: boolean
+}
+
+/**
+ * A short trailing window of daily scores — the "some kind of meter" for
+ * Today. Deliberately not the full History screen (section 33, Phase 5):
+ * this reuses getTodayScore per day rather than computed DailySummary
+ * records, so it's honest about being a lightweight strip, not the real
+ * weekly report.
+ */
+export function getWeekProgress(
+  tasks: ProtocolTask[],
+  records: DailyRecord[],
+  date: Date = new Date(),
+  days = 7,
+): DayProgress[] {
+  const todayStr = todayKey(date)
+  const result: DayProgress[] = []
+  for (let i = days - 1; i >= 0; i--) {
+    const d = new Date(date)
+    d.setDate(d.getDate() - i)
+    const dStr = todayKey(d)
+    const score = getTodayScore(tasks, records, d)
+    result.push({
+      date: dStr,
+      weekday: d.getDay(),
+      earned: score.earned,
+      max: score.max,
+      ratio: score.max > 0 ? score.earned / score.max : null,
+      isToday: dStr === todayStr,
+      hasActivity: recordsForDate(records, dStr).length > 0,
+    })
+  }
+  return result
+}
+
 export function getCurrentLevel(levels: Level[], lifetimeXp: number): Level {
   const sorted = [...levels].sort((a, b) => a.level - b.level)
   return (
