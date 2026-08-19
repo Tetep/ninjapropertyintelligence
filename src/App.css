@@ -14,6 +14,8 @@
 
 .app-content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
   padding: 20px 16px 12px;
   overflow-y: auto;
 }
@@ -189,4 +191,101 @@ section {
 .nav-tab:disabled {
   opacity: 0.45;
   cursor: default;
+}
+
+/* --- Protocol screen --- */
+
+.protocol-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.protocol-progress-label {
+  font-size: 12px;
+  color: var(--text-faint);
+  text-align: right;
+}
+
+.protocol-clear-card {
+  text-align: center;
+  margin: auto 0;
+}
+
+.mission-card--milestone {
+  text-align: center;
+  border-color: var(--accent-border);
+  background: linear-gradient(180deg, var(--accent-dim), var(--bg-elevated) 60%);
+}
+
+.task-controls,
+.reflection-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #1a0d06;
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-primary:active {
+  opacity: 0.85;
+}
+
+.btn-ghost {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.mission-cta {
+  margin-top: 14px;
+  width: 100%;
+}
+
+.reflection-input {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  padding: 10px;
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.toast-card {
+  margin: auto 0;
+  text-align: center;
+  background: var(--bg-elevated);
+  border: 1px solid var(--accent-border);
+  border-radius: 14px;
+  padding: 32px 20px;
+}
+
+.toast-headline {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.toast-body {
+  margin-top: 10px;
+  font-size: 15px;
+  color: var(--text-dim);
+  line-height: 1.4;
 }

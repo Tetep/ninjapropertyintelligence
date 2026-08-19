@@ -18,6 +18,7 @@ interface TodayScreenProps {
   nextLevel: Level | null
   score: TodayScoreSummary
   nextMission: ProtocolTask | null
+  onGoToProtocol: () => void
 }
 
 export function TodayScreen({
@@ -27,6 +28,7 @@ export function TodayScreen({
   nextLevel,
   score,
   nextMission,
+  onGoToProtocol,
 }: TodayScreenProps) {
   const xpIntoLevel = user.lifetimeXp - currentLevel.xpRequired
   const xpForLevel = nextLevel ? nextLevel.xpRequired - currentLevel.xpRequired : null
@@ -78,6 +80,9 @@ export function TodayScreen({
             {nextMission.description && (
               <p className="mission-description">{nextMission.description}</p>
             )}
+            <button type="button" className="btn-primary mission-cta" onClick={onGoToProtocol}>
+              Go do it
+            </button>
           </>
         ) : (
           <p className="mission-name">🎉 Protocol clear for today. Nothing waiting on you.</p>

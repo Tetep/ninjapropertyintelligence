@@ -66,6 +66,13 @@ export interface ProtocolTask {
   points: number
   required: boolean
   active: boolean
+  /**
+   * What completing this task is evidence of — shown right after the user
+   * logs it. This is the identity-conditioning half of the loop (section
+   * 7): "more important than the points." Optional so milestone/reflection
+   * entries can skip it.
+   */
+  evidenceText?: string
 }
 
 /**

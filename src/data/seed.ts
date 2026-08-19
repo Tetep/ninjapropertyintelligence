@@ -64,7 +64,9 @@ export const SEED_LEVELS: Level[] = [
 // Sequence numbers are global across the whole day so "next mission" is a
 // single sort, not a per-category lookup. Points are a first-pass split
 // loosely following the 40/30/20/10 weighting in section 21 — Phase 3
-// will make these editable and tune the exact values.
+// will make these editable and tune the exact values. evidenceText is
+// what gets shown right after logging the task (section 7) — short,
+// identity-reinforcing, never a scoreboard-only line.
 export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
   // --- Night before (Mon-Thu evenings, prepping for the next workday) ---
   {
@@ -77,6 +79,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 2,
     required: true,
     active: true,
+    evidenceText: 'Tomorrow morning just got one decision lighter.',
   },
   {
     id: 'night-coffee',
@@ -88,6 +91,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 2,
     required: true,
     active: true,
+    evidenceText: "You're setting up Future Tim to just walk and go.",
   },
   {
     id: 'night-gym-bag',
@@ -99,6 +103,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 2,
     required: true,
     active: true,
+    evidenceText: "No excuse left in the bag. It's already packed.",
   },
   {
     id: 'night-stage',
@@ -111,6 +116,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 2,
     required: true,
     active: true,
+    evidenceText: 'Discipline tonight is just fewer decisions tomorrow.',
   },
   {
     id: 'night-bedtime',
@@ -122,6 +128,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 2,
     required: true,
     active: true,
+    evidenceText: 'You kept a promise to a version of you that hasn’t woken up yet.',
   },
 
   // --- Morning protocol (Mon-Fri, ~5:00 AM) ---
@@ -135,6 +142,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 3,
     required: true,
     active: true,
+    evidenceText: 'First promise of the day, kept before the sun’s even up.',
   },
   {
     id: 'morning-dog-feed',
@@ -146,6 +154,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 2,
     required: true,
     active: true,
+    evidenceText: 'You take care of what depends on you.',
   },
   {
     id: 'morning-coffee',
@@ -157,6 +166,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 2,
     required: true,
     active: true,
+    evidenceText: 'Fuel for the operator, not the wanderer.',
   },
   {
     id: 'morning-dog-walk',
@@ -168,6 +178,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 3,
     required: true,
     active: true,
+    evidenceText: 'Moving before you feel like it. That’s the whole skill.',
   },
   {
     id: 'morning-van',
@@ -179,6 +190,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 2,
     required: true,
     active: true,
+    evidenceText: 'No negotiation. Just motion.',
   },
   {
     id: 'morning-dojo',
@@ -190,6 +202,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 3,
     required: true,
     active: true,
+    evidenceText: 'You showed up. Half the battle, every single time.',
   },
 
   // --- Gym: cardio days ---
@@ -203,6 +216,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 2,
     required: true,
     active: true,
+    evidenceText: 'You protect the body you still need in twenty years.',
   },
   {
     id: 'gym-lowerback-mwf',
@@ -214,6 +228,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 2,
     required: true,
     active: true,
+    evidenceText: 'Maintenance now beats rehab later.',
   },
   {
     id: 'gym-elliptical',
@@ -225,6 +240,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 8,
     required: true,
     active: true,
+    evidenceText: 'A man who protects his health and keeps promises to his future self.',
   },
   {
     id: 'gym-leave-mwf',
@@ -236,6 +252,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 3,
     required: true,
     active: true,
+    evidenceText: 'The whole workday is protected because this happened on time.',
   },
 
   // --- Gym: circuit days ---
@@ -249,6 +266,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 2,
     required: true,
     active: true,
+    evidenceText: 'You protect the body you still need in twenty years.',
   },
   {
     id: 'gym-lowerback-tt',
@@ -260,6 +278,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 2,
     required: true,
     active: true,
+    evidenceText: 'Maintenance now beats rehab later.',
   },
   {
     id: 'gym-cardio-warmup',
@@ -271,6 +290,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 4,
     required: true,
     active: true,
+    evidenceText: 'Blood moving. Brain waking up. Excuses losing ground.',
   },
   {
     id: 'gym-circuit',
@@ -282,6 +302,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 4,
     required: true,
     active: true,
+    evidenceText: 'A man who protects his health and keeps promises to his future self.',
   },
   {
     id: 'gym-leave-tt',
@@ -293,6 +314,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 3,
     required: true,
     active: true,
+    evidenceText: 'The whole workday is protected because this happened on time.',
   },
 
   // --- Transition: gym -> entrepreneur mode (Mon-Fri) ---
@@ -306,6 +328,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 2,
     required: true,
     active: true,
+    evidenceText: 'Ninja mode off. Operator mode on.',
   },
   {
     id: 'transition-unlock',
@@ -317,6 +340,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 0,
     required: false,
     active: true,
+    evidenceText: 'Health Protocol Complete. Everything after this runs on energy you just earned.',
   },
 
   // --- Entrepreneur missions (Mon-Fri, 3 user-defined for MVP) ---
@@ -330,6 +354,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 10,
     required: true,
     active: true,
+    evidenceText: 'Revenue-producing work. Not busywork. That’s the difference.',
   },
   {
     id: 'mission-2',
@@ -341,6 +366,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 10,
     required: true,
     active: true,
+    evidenceText: 'You build. That’s what you told yourself you are.',
   },
   {
     id: 'mission-3',
@@ -352,6 +378,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 10,
     required: true,
     active: true,
+    evidenceText: 'Three for three. That’s not a coincidence, that’s a pattern.',
   },
 
   // --- Identity / substance (every day) ---
@@ -365,6 +392,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 15,
     required: true,
     active: true,
+    evidenceText: 'You didn’t trade tomorrow’s strength for today’s impulse.',
   },
   {
     id: 'truthful-checkin',
@@ -377,6 +405,7 @@ export const SEED_PROTOCOL_TASKS: ProtocolTask[] = [
     points: 5,
     required: true,
     active: true,
+    evidenceText: 'You spoke and walked in truth, even with just yourself.',
   },
 
   // --- Evening reflection (every day, optional) ---
