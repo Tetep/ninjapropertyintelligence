@@ -1,0 +1,192 @@
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  max-width: 480px;
+  margin: 0 auto;
+  border-inline: 1px solid var(--border);
+}
+
+.loading {
+  margin: auto;
+  color: var(--text-dim);
+}
+
+.app-content {
+  flex: 1;
+  padding: 20px 16px 12px;
+  overflow-y: auto;
+}
+
+.today-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 6px;
+}
+
+section {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.identity-card .identity-statement {
+  font-size: 16px;
+  line-height: 1.45;
+  font-style: italic;
+  color: var(--text);
+}
+
+.rank-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.rank-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.rank-avatar {
+  font-size: 34px;
+  line-height: 1;
+}
+
+.xp-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.progress-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 999px;
+}
+
+.score-card {
+  text-align: center;
+}
+
+.score-value {
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.score-max {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-faint);
+}
+
+.mission-card {
+  border-color: var(--accent-border);
+  background: linear-gradient(180deg, var(--accent-dim), var(--bg-elevated) 60%);
+}
+
+.mission-category {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+.mission-name {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.mission-description {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.beliefs-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-dim);
+  counter-reset: belief;
+}
+
+.beliefs-list li {
+  counter-increment: belief;
+  padding-left: 22px;
+  position: relative;
+}
+
+.beliefs-list li::before {
+  content: counter(belief);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent-dim);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-shell {
+  display: flex;
+  border-top: 1px solid var(--border);
+  background: var(--bg-elevated);
+}
+
+.nav-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 4px 12px;
+  background: none;
+  border: none;
+  color: var(--text-faint);
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.nav-tab span:first-child {
+  font-size: 18px;
+}
+
+.nav-tab--active {
+  color: var(--accent);
+}
+
+.nav-tab:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
