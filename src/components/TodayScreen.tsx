@@ -1,5 +1,6 @@
 import type { Belief, Level, ProtocolTask, User } from '../types/models'
 import type { TodayScoreSummary } from '../lib/today'
+import { NinjaMark } from './NinjaMark'
 
 const CATEGORY_LABEL: Record<ProtocolTask['category'], string> = {
   night_prep: 'Night Prep',
@@ -48,7 +49,7 @@ export function TodayScreen({
             <p className="rank-title">{currentLevel.title}</p>
           </div>
           <div className="rank-avatar" aria-hidden="true">
-            🥷
+            <NinjaMark size={40} />
           </div>
         </div>
         <div className="xp-row">
