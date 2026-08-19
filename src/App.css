@@ -49,31 +49,32 @@ section {
   color: var(--text);
 }
 
-.rank-card__top {
+/* --- Hero card: avatar + rank + XP + today's score, one glance --- */
+
+.hero-card {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
+  gap: 12px;
+}
+
+.hero-card__info {
+  flex: 1;
+  min-width: 0;
 }
 
 .rank-title {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--gold);
-}
-
-.rank-avatar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  line-height: 1.2;
 }
 
 .xp-row {
   display: flex;
   justify-content: space-between;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-dim);
-  margin-bottom: 8px;
+  margin: 4px 0 8px;
 }
 
 .progress-track {
@@ -89,21 +90,31 @@ section {
   border-radius: 999px;
 }
 
-.score-card {
-  text-align: center;
+.hero-card__score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
 }
 
-.score-value {
-  font-size: 40px;
+.hero-card__score-value {
+  font-size: 26px;
   font-weight: 800;
   color: var(--accent);
   line-height: 1;
 }
 
-.score-max {
-  font-size: 20px;
+.hero-card__score-max {
+  font-size: 13px;
   font-weight: 600;
   color: var(--text-faint);
+}
+
+.hero-card__score .eyebrow {
+  margin: 4px 0 0;
+  font-size: 9px;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .mission-card {
@@ -159,6 +170,21 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.today-secondary {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.today-secondary section {
+  padding: 12px 14px;
+}
+
+.identity-card--compact .identity-statement {
+  font-size: 13px;
+  line-height: 1.4;
 }
 
 .nav-shell {
@@ -388,4 +414,144 @@ section {
 .wizard-input,
 .wizard-draft {
   margin-top: 12px;
+}
+
+/* --- Ninja avatar (mood-animated chibi bust) --- */
+
+.ninja-avatar {
+  display: inline-block;
+}
+
+.ninja-avatar__figure {
+  transform-box: fill-box;
+  transform-origin: 50% 60%;
+  animation: ninja-bob 2.8s ease-in-out infinite;
+}
+
+.ninja-avatar__tail {
+  transform-box: fill-box;
+  transform-origin: 15% 35%;
+  animation: ninja-tail-flutter 2.2s ease-in-out infinite;
+}
+
+.ninja-avatar__brow {
+  transform-box: fill-box;
+  transition: transform 0.4s ease;
+}
+.ninja-avatar__brow--left {
+  transform-origin: right center;
+}
+.ninja-avatar__brow--right {
+  transform-origin: left center;
+}
+
+.ninja-avatar__eyelid {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* steady: neutral, brows resting */
+.ninja-avatar--steady .ninja-avatar__brow--left,
+.ninja-avatar--steady .ninja-avatar__brow--right {
+  transform: rotate(0deg);
+}
+
+/* good: a touch more focused */
+.ninja-avatar--good .ninja-avatar__brow--left {
+  transform: rotate(-6deg) translateY(-1px);
+}
+.ninja-avatar--good .ninja-avatar__brow--right {
+  transform: rotate(6deg) translateY(-1px);
+}
+
+/* thriving: determined brows, energetic bounce, sparkles, fist pump, glow */
+.ninja-avatar--thriving .ninja-avatar__brow--left {
+  transform: rotate(-12deg) translateY(-2px);
+}
+.ninja-avatar--thriving .ninja-avatar__brow--right {
+  transform: rotate(12deg) translateY(-2px);
+}
+.ninja-avatar--thriving .ninja-avatar__figure {
+  animation-name: ninja-bob-energetic;
+  animation-duration: 1.1s;
+}
+.ninja-avatar--thriving .ninja-avatar__tail {
+  animation-duration: 0.8s;
+}
+.ninja-avatar--thriving {
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--accent) 55%, transparent));
+}
+
+/* drift: slumped, sleepy eyelids, slow droop, muted color — game state, not a verdict */
+.ninja-avatar--drift .ninja-avatar__brow--left {
+  transform: rotate(10deg) translateY(2px);
+}
+.ninja-avatar--drift .ninja-avatar__brow--right {
+  transform: rotate(-10deg) translateY(2px);
+}
+.ninja-avatar--drift .ninja-avatar__eyelid {
+  opacity: 1;
+}
+.ninja-avatar--drift .ninja-avatar__figure {
+  animation-name: ninja-bob-slow;
+  animation-duration: 3.8s;
+}
+.ninja-avatar--drift .ninja-avatar__tail {
+  animation-duration: 4.5s;
+}
+.ninja-avatar--drift {
+  filter: saturate(0.55) brightness(0.85);
+}
+
+@keyframes ninja-bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-3px) rotate(0.5deg); }
+}
+@keyframes ninja-bob-energetic {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-6px) rotate(1.5deg); }
+}
+@keyframes ninja-bob-slow {
+  0%, 100% { transform: translateY(2px) rotate(-7deg); }
+  50% { transform: translateY(3px) rotate(-7deg); }
+}
+
+@keyframes ninja-tail-flutter {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-6deg); }
+}
+
+.ninja-avatar__sparkles circle {
+  animation: sparkle-twinkle 1.6s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.ninja-avatar__sparkles circle:nth-child(2) { animation-delay: 0.3s; }
+.ninja-avatar__sparkles circle:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes sparkle-twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.7); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+.ninja-avatar__fist {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: fist-pump 0.7s ease-in-out infinite;
+}
+
+@keyframes fist-pump {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ninja-avatar__figure,
+  .ninja-avatar__tail,
+  .ninja-avatar__sparkles circle,
+  .ninja-avatar__fist {
+    animation: none;
+  }
 }

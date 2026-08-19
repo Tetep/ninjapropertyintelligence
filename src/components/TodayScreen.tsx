@@ -1,6 +1,7 @@
 import type { Belief, Level, ProtocolTask, User } from '../types/models'
 import type { DayProgress, TodayScoreSummary } from '../lib/today'
-import { NinjaMark } from './NinjaMark'
+import { getMood } from '../lib/today'
+import { NinjaAvatar } from './NinjaAvatar'
 import { WeekMeter } from './WeekMeter'
 
 const CATEGORY_LABEL: Record<ProtocolTask['category'], string> = {
@@ -24,6 +25,13 @@ interface TodayScreenProps {
   onGoToProtocol: () => void
 }
 
+/**
+ * Hierarchy, deliberately: hero (who you are + how you're doing) → the one
+ * decision that matters right now → everything else, smaller. Previously
+ * six equal-weight full cards read as a wall — this makes "what do I do"
+ * the thing your eye lands on, per section 11's four questions in that
+ * priority order.
+ */
 export function TodayScreen({
   user,
   beliefs,
@@ -37,40 +45,30 @@ export function TodayScreen({
   const xpIntoLevel = user.lifetimeXp - currentLevel.xpRequired
   const xpForLevel = nextLevel ? nextLevel.xpRequired - currentLevel.xpRequired : null
   const levelProgress = xpForLevel ? Math.min(100, Math.round((xpIntoLevel / xpForLevel) * 100)) : 100
+  const mood = getMood(weekProgress)
 
   return (
     <div className="today-screen">
-      <section className="identity-card">
-        <p className="eyebrow">Who am I becoming</p>
-        <p className="identity-statement">"{user.identityStatement}"</p>
-      </section>
-
-      <section className="rank-card">
-        <div className="rank-card__top">
-          <div>
-            <p className="eyebrow">Current Rank</p>
-            <p className="rank-title">{currentLevel.title}</p>
+      <section className="hero-card">
+        <NinjaAvatar mood={mood} size={92} />
+        <div className="hero-card__info">
+          <p className="eyebrow">Current Rank</p>
+          <p className="rank-title">{currentLevel.title}</p>
+          <div className="xp-row">
+            <span>{user.lifetimeXp} XP</span>
+            {nextLevel && <span>{nextLevel.title} at {nextLevel.xpRequired}</span>}
           </div>
-          <div className="rank-avatar" aria-hidden="true">
-            <NinjaMark size={40} />
-          </div>
+          {xpForLevel !== null && (
+            <div className="progress-track" role="progressbar" aria-valuenow={levelProgress} aria-valuemin={0} aria-valuemax={100}>
+              <div className="progress-fill" style={{ width: `${levelProgress}%` }} />
+            </div>
+          )}
         </div>
-        <div className="xp-row">
-          <span>{user.lifetimeXp} lifetime XP</span>
-          {nextLevel && <span>{nextLevel.title} at {nextLevel.xpRequired}</span>}
+        <div className="hero-card__score">
+          <span className="hero-card__score-value">{score.earned}</span>
+          <span className="hero-card__score-max">/{score.max}</span>
+          <span className="eyebrow">Today's Mark</span>
         </div>
-        {xpForLevel !== null && (
-          <div className="progress-track" role="progressbar" aria-valuenow={levelProgress} aria-valuemin={0} aria-valuemax={100}>
-            <div className="progress-fill" style={{ width: `${levelProgress}%` }} />
-          </div>
-        )}
-      </section>
-
-      <section className="score-card">
-        <p className="eyebrow">Today's Mark</p>
-        <p className="score-value">
-          {score.earned} <span className="score-max">/ {score.max}</span>
-        </p>
       </section>
 
       <section className="mission-card">
@@ -93,16 +91,23 @@ export function TodayScreen({
         )}
       </section>
 
-      <WeekMeter days={weekProgress} />
+      <div className="today-secondary">
+        <section className="identity-card identity-card--compact">
+          <p className="eyebrow">Who am I becoming</p>
+          <p className="identity-statement">"{user.identityStatement}"</p>
+        </section>
 
-      <section className="beliefs-card">
-        <p className="eyebrow">Standing Beliefs</p>
-        <ol className="beliefs-list">
-          {beliefs.map((b) => (
-            <li key={b.id}>{b.belief}</li>
-          ))}
-        </ol>
-      </section>
+        <WeekMeter days={weekProgress} />
+
+        <section className="beliefs-card">
+          <p className="eyebrow">Standing Beliefs</p>
+          <ol className="beliefs-list">
+            {beliefs.map((b) => (
+              <li key={b.id}>{b.belief}</li>
+            ))}
+          </ol>
+        </section>
+      </div>
     </div>
   )
 }

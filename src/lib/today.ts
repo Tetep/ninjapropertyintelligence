@@ -109,6 +109,40 @@ export function getWeekProgress(
   return result
 }
 
+export type Mood = 'thriving' | 'good' | 'steady' | 'drift'
+
+/**
+ * Drives the character's animation (section 9/10: game-state feedback,
+ * never a verdict on Tim). Blends today's ratio with the recent trend so
+ * mood doesn't swing to "drift" just because it's 6am and nothing's
+ * logged yet, and defaults to neutral rather than punishing on day one.
+ */
+export function getMood(weekProgress: DayProgress[]): Mood {
+  const today = weekProgress.find((d) => d.isToday)
+  // hasActivity, not just ratio !== null — a scheduled-but-untouched day
+  // scores 0 same as a logged miss, but only a logged miss should count
+  // as real drift. Otherwise a brand-new user reads as drift on day one.
+  const priorRatios = weekProgress
+    .filter((d) => !d.isToday && d.hasActivity && d.ratio !== null)
+    .map((d) => d.ratio as number)
+  const priorAvg = priorRatios.length
+    ? priorRatios.reduce((sum, r) => sum + r, 0) / priorRatios.length
+    : null
+
+  let blended: number | null
+  if (today?.hasActivity && today.ratio !== null) {
+    blended = priorAvg !== null ? today.ratio * 0.65 + priorAvg * 0.35 : today.ratio
+  } else {
+    blended = priorAvg
+  }
+
+  if (blended === null) return 'steady'
+  if (blended >= 0.8) return 'thriving'
+  if (blended >= 0.55) return 'good'
+  if (blended >= 0.3) return 'steady'
+  return 'drift'
+}
+
 export function getCurrentLevel(levels: Level[], lifetimeXp: number): Level {
   const sorted = [...levels].sort((a, b) => a.level - b.level)
   return (
